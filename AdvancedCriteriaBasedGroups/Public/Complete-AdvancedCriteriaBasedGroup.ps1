@@ -3,7 +3,15 @@
 function Complete-AdvancedCriteriaBasedGroup {
     [CmdletBinding(SupportsShouldProcess = $true)]
 
-    Param()
+    Param(
+        # A POST of the whole user object will be sent to the urls
+        [Parameter(Mandatory = $false)]
+        [String[]] $TransitionInUrls,
+
+        # A DELETE of the whole user object will be sent to the urls
+        [Parameter(Mandatory = $false)]
+        [String[]] $TransitionOutUrls
+    )
 
     Process {
         #region Process new users
