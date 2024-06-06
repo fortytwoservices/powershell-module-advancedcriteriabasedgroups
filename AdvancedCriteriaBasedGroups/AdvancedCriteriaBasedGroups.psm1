@@ -1,3 +1,8 @@
+New-Variable -Name Connected -Value $false -Scope Script -Force
+New-Variable -Name Group -Value $null -Scope Script -Force
+New-Variable -Name ExistingMembers -Value @{} -Scope Script -Force
+New-Variable -Name AddedMembers -Value @{} -Scope Script -Force
+
 # Get public and private function definition files.
 $Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue )
 $Public  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue )
