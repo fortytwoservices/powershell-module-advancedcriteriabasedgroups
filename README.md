@@ -4,7 +4,7 @@ A module for working with advanced criteria for Entra ID groups.
 
 | Metadata | Information |
 | --- | --- |
-| Version | 0.0.1 |
+| Version | 1.0.0 |
 | Author | Marius Solbakken Mellum and Thomas Rogne Johansen |
 | Company name | Fortytwo |
 | PowerShell version | 7.1 |
