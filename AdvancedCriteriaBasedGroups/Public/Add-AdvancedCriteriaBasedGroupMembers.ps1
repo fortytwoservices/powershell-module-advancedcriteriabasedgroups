@@ -27,7 +27,7 @@ function Add-AdvancedCriteriaBasedGroupMembers {
                 else {
                     $addedCount += 1
                     Write-Debug "Adding user $($_.id)"
-                    $Script:AddedMembers[$Script:Group.Id][$_.Id] = $Script:AllUsers.ContainsKey($_.Id) ? $Script:AllUsers[$_.Id] : $_   
+                    $Script:AddedMembers[$Script:Group.Id][$_.Id] = $Script:AllUsers.ContainsKey($_.Id) ? $Script:AllUsers[$_.Id] : $_
                 }
 
                 if ($Passthru.IsPresent) {

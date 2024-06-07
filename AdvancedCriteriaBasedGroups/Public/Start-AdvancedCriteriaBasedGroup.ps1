@@ -29,7 +29,7 @@ function Start-AdvancedCriteriaBasedGroup {
         $Script:ExistingMembers[$Script:Group.Id] = @{}
         Get-MgGroupMember -GroupId $Script:Group.Id -All |
         ForEach-Object {
-            $Script:ExistingMembers[$Script:Group.Id][$_.Id] = $_
+            $Script:ExistingMembers[$Script:Group.Id][$_.Id] = $Script:AllUsers.ContainsKey($_.Id) ? $Script:AllUsers[$_.Id] : $_
         }
 
         Write-Verbose "Group $($Script:Group.DisplayName) ($($Script:Group.Id)) has $($Script:ExistingMembers[$Script:Group.Id].Count) existing members"
