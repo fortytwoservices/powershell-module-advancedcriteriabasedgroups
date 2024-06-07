@@ -67,7 +67,7 @@ function Connect-AdvancedCriteriaBasedGroups {
         
         if (!$DoNotCacheAllUsers.IsPresent) {
             Write-Verbose "Building cache of all users in Entra ID (this may take a while)"
-            $Script:AllUsers = New-Object System.Collections.ArrayList
+            $Script:AllUsers = @{}
             $uri = "https://graph.microsoft.com/beta/users?`$top=999"
 
             if ($UserProperties) {
@@ -77,7 +77,9 @@ function Connect-AdvancedCriteriaBasedGroups {
             while ($uri) {
                 $response = Invoke-MgGraphRequest -Method Get -Uri $uri
                 if ($response.value) {
-                    $Script:AllUsers.AddRange($response.value) | Out-Null                
+                    $response.value | ForEach-Object {
+                        $Script:AllUsers[$_.id] = $_
+                    }
                 }
                 $uri = $response.'@odata.nextLink'
             }

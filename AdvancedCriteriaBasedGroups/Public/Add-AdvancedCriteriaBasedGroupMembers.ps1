@@ -14,12 +14,12 @@ function Add-AdvancedCriteriaBasedGroupMembers {
         if($PSCmdlet.ParameterSetName -eq "Criteria") {
             $count = 0
             Write-Verbose "Evaluating criteria: $Criteria"
-            $Script:AllUsers | 
+            $Script:AllUsers.Values | 
             Where-Object -FilterScript $Criteria |
             ForEach-Object {
                 Write-Debug "Adding user $($_.id)"
                 $count += 1
-                $Script:AddedMembers[$Script:Group.Id][$_.Id] = $_
+                $Script:AddedMembers[$Script:Group.Id][$_.Id] = $Script:AllUsers.ContainsKey($_.Id) ? $Script:AllUsers[$_.Id] : $_
                 
                 if($Passthru.IsPresent) {
                     $_
