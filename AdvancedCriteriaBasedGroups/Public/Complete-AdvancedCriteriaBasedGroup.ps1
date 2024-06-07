@@ -29,9 +29,11 @@ function Complete-AdvancedCriteriaBasedGroup {
                 }
 
                 Write-Verbose "Invoking transition in urls for user $($_.Key)"
-                $TransitionInUrls | ForEach-Object {
-                    Write-Debug "Invoking transition in url for user $($_.Key): $_"
-                    Invoke-RestMethod -Uri $_ -Method Post -Body $body -ContentType "application/json"
+                if ($PSCmdlet.ShouldProcess("Group $($Script:Group.Id)", "Invoke transition in urls")) {
+                    $TransitionInUrls | ForEach-Object {
+                        Write-Debug "Invoking transition in url for user $($_.Key): $_"
+                        Invoke-RestMethod -Uri $_ -Method Post -Body $body -ContentType "application/json"
+                    }
                 }
             }
 
@@ -56,9 +58,12 @@ function Complete-AdvancedCriteriaBasedGroup {
                 }
 
                 Write-Verbose "Invoking transition out urls for user $($_.Key)"
-                $TransitionOutUrls | ForEach-Object {
-                    Write-Debug "Invoking transition out url for user $($_.Key): $_"
-                    Invoke-RestMethod -Uri $_ -Method Post -Body $body -ContentType "application/json"
+                if ($PSCmdlet.ShouldProcess("Group $($Script:Group.Id)", "Invoke transition out urls")) {
+                    $TransitionOutUrls | ForEach-Object {
+                        Write-Debug "Invoking transition out url for user $($_.Key): $_"
+                    
+                        Invoke-RestMethod -Uri $_ -Method Post -Body $body -ContentType "application/json"
+                    }
                 }
             }
 
