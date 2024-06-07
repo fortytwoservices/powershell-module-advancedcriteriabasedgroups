@@ -1,4 +1,13 @@
+<#
+.DESCRIPTION
+    Completes the group membership based on criterias or groupmemberships and triggers webhooks for transitions in and out of the group.
 
+.EXAMPLE
+    Complete-AdvancedCriteriaBasedGroup -TransitionInUrls "https://webhook.com/transitionin" -TransitionOutUrls "https://webhook.com/transitionout"
+
+    This example completes the group membership based on criterias or groupmemberships and triggers webhooks for transitions in and out of the group.
+
+#>
 
 function Complete-AdvancedCriteriaBasedGroup {
     [CmdletBinding(SupportsShouldProcess = $true)]
