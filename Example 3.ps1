@@ -1,7 +1,4 @@
-# Load module locally (Windows)
-Import-Module .\AdvancedCriteriaBasedGroups -Force -Verbose
-
-# Load module locally (MacOS)
+# Load module locally
 Import-Module ./AdvancedCriteriaBasedGroups -Force -Verbose
 
 # Reuse existing connection to Microsoft Graph

@@ -1,5 +1,5 @@
 # Load module locally
-Import-Module .\AdvancedCriteriaBasedGroups -Force -Verbose
+Import-Module ./AdvancedCriteriaBasedGroups -Force -Verbose
 
 # Reuse existing connection to Microsoft Graph
 Connect-AdvancedCriteriaBasedGroups -UseExistingMgGraphConnection -Verbose
