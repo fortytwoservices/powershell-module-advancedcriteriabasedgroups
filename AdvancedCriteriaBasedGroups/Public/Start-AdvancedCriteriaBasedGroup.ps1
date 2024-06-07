@@ -1,14 +1,23 @@
+<#
+.DESCRIPTION
 
+.EXAMPLE
+Start-AdvancedCriteriaBasedGroup -ObjectId "404c71ff-bb33-4434-85e1-2e6c9863d33c" -Verbose
+#>
 function Start-AdvancedCriteriaBasedGroup {
     [CmdletBinding()]
 
     Param(
+        # The object id of the group to work on
         [Parameter(Mandatory = $true)]
-        [string] $ObjectId
+        [string] $ObjectId,
+
+        [Parameter(Mandatory = $false)]
+        [Switch] $UseGraphBetaEndpoint
     )
 
     Process {
-        $Script:Group = Get-MgGroup -GroupId $ObjectId
+        $Script:Group = Invoke-MgGraphRequest -Uri "https://graph.microsoft.com/$($UseGraphBetaEndpoint.IsPresent ? "beta" : "v1.0")/groups/$ObjectId" -Method Get
         if (-not $Script:Group) {
             return
         }
