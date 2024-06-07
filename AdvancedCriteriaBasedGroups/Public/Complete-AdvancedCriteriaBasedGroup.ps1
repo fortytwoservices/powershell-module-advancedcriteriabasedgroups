@@ -28,7 +28,9 @@ function Complete-AdvancedCriteriaBasedGroup {
                     operation = "add"
                 }
 
+                Write-Verbose "Invoking transition in urls for user $($_.Key)"
                 $TransitionInUrls | ForEach-Object {
+                    Write-Debug "Invoking transition in url for user $($_.Key): $_"
                     Invoke-RestMethod -Uri $_ -Method Post -Body $body -ContentType "application/json"
                 }
             }
@@ -53,7 +55,9 @@ function Complete-AdvancedCriteriaBasedGroup {
                     operation = "remove"
                 }
 
+                Write-Verbose "Invoking transition out urls for user $($_.Key)"
                 $TransitionOutUrls | ForEach-Object {
+                    Write-Debug "Invoking transition out url for user $($_.Key): $_"
                     Invoke-RestMethod -Uri $_ -Method Post -Body $body -ContentType "application/json"
                 }
             }
