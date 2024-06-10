@@ -42,11 +42,24 @@ function Connect-AdvancedCriteriaBasedGroups {
         # User properties to include in the cache of all users in Entra ID. Default is $null
         [Parameter(Mandatory = $false, ParameterSetName = "AutomationAccountUserAssignedIdentity")]
         [Parameter(Mandatory = $false, ParameterSetName = "MgGraphConnection")]
-        [String[]] $UserProperties = $null
+        [String[]] $UserProperties = $null,
+
+        [Parameter(Mandatory = $false, ParameterSetName = "AutomationAccountUserAssignedIdentity")]
+        [Parameter(Mandatory = $false, ParameterSetName = "MgGraphConnection")]
+        [ValidateSet("Global","China","USGov","USGovDoD")]
+        [String] $Environment = "Global"
 
     )
 
     Process {
+        $GraphHostnames = @{
+            "Global" = "graph.microsoft.com"
+            "China" = "microsoftgraph.chinacloudapi.cn"
+            "USGov" = "graph.microsoft.us"
+            "USGovDoD" = "dod-graph.microsoft.us"
+        }
+        $Script:GraphHostname = $GraphHostnames[$Environment]
+
         # Region Connect to Microsoft Graph
         $Script:Connected = $false
 
@@ -60,7 +73,7 @@ function Connect-AdvancedCriteriaBasedGroups {
                 return
             }
             # Connect to Microsoft Graph using the User Assigned Managed Identity
-            Connect-MgGraph -Identity -ClientId $ENV:AUTOMATION_SC_USER_ASSIGNED_IDENTITY_ID -NoWelcome
+            Connect-MgGraph -Identity -ClientId $ENV:AUTOMATION_SC_USER_ASSIGNED_IDENTITY_ID -NoWelcome -Environment $Environment
             $_context = Get-MgContext
 
             # Check if the identity has the required permissions
@@ -99,7 +112,7 @@ function Connect-AdvancedCriteriaBasedGroups {
             Write-Verbose "Building cache of all users in Entra ID (this may take a while)"
             $Script:AllUsers = @{}
             # Using the beta endpoint to get all UserProperties 
-            $uri = "https://graph.microsoft.com/beta/users?`$top=999"
+            $uri = "https://$($Script:GraphHostname)/beta/users?`$top=999"
 
             # Checks if UserProperties has been specified
             if ($UserProperties) {
