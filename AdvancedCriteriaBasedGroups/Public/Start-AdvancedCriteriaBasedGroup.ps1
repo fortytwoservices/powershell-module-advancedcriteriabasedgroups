@@ -22,7 +22,7 @@ function Start-AdvancedCriteriaBasedGroup {
     )
 
     Process {
-        $Script:Group = Invoke-MgGraphRequest -Uri "https://graph.microsoft.com/$($UseGraphBetaEndpoint.IsPresent ? "beta" : "v1.0")/groups/$ObjectId" -Method Get
+        $Script:Group = Invoke-MgGraphRequest -Uri "https://$($Script:GraphHostname)/$($UseGraphBetaEndpoint.IsPresent ? "beta" : "v1.0")/groups/$ObjectId" -Method Get
         if (-not $Script:Group) {
             return
         }
