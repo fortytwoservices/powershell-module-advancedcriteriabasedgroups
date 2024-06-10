@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/fortytwoservices/powershell-module-advancedcriteriabasedgroups/compare/v1.0.0...v1.1.0) (2024-06-10)
+
+
+### Features
+
+* Add Select-AdvancedCriteriaBasedGroupUsers for more advanced scenarios ([7d43148](https://github.com/fortytwoservices/powershell-module-advancedcriteriabasedgroups/commit/7d431481463b93a3d34daa321ee21cf38ea332f4))
+
 ## 1.0.0 (2024-06-07)
 
 
