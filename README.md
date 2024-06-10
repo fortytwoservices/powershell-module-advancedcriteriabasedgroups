@@ -12,7 +12,7 @@ A module for working with advanced criteria for Entra ID groups.
 ## Add-AdvancedCriteriaBasedGroupMember
 
 ### SYNOPSIS
-{{ Fill in the Synopsis }}
+Adds a user from a group based on a criteria or a list of group members.
 
 ### SYNTAX
 
@@ -21,21 +21,24 @@ Add-AdvancedCriteriaBasedGroupMember [-User] <Object> [-ProgressAction <ActionPr
 ```
 
 ### DESCRIPTION
-
+Adds a user from a group if the user is a member of the specified group.
+Used in conjunction with Get-AdvancedCriteriaBasedGroupUsers to filter users based on attributes.
 
 ### EXAMPLES
 
-#### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+#### EXAMPLE 1
+```
+Get-AdvancedCriteriaBasedGroupUsers -MembersOfGroupObjectId "20a2a612-fbd5-4fd6-a94a-1edefcdf48a9" | 
+Where-Object usageLocation -in "NO" |
+Add-AdvancedCriteriaBasedGroupMember -Debug
 ```
 
-{{ Add example description here }}
+This example Adds all users from the group that are members of the group with the specified object id.
 
 ### PARAMETERS
 
 #### -User
-
+Piped user object to add from group
 
 ```yaml
 Type: Object
@@ -43,7 +46,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
@@ -69,10 +72,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### INPUTS
 
-#### System.Object
 ### OUTPUTS
 
-#### System.Object
 ### NOTES
 
 ### RELATED LINKS
@@ -206,7 +207,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## Complete-AdvancedCriteriaBasedGroup
 
 ### SYNOPSIS
-{{ Fill in the Synopsis }}
 
 ### SYNTAX
 
@@ -216,51 +216,21 @@ Complete-AdvancedCriteriaBasedGroup [[-TransitionInUrls] <String[]>] [[-Transiti
 ```
 
 ### DESCRIPTION
-
+Completes the group membership based on criterias or groupmemberships and triggers webhooks for transitions in and out of the group.
 
 ### EXAMPLES
 
-#### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+#### EXAMPLE 1
+```
+Complete-AdvancedCriteriaBasedGroup -TransitionInUrls "https://webhook.com/transitionin" -TransitionOutUrls "https://webhook.com/transitionout"
 ```
 
-{{ Add example description here }}
+This example completes the group membership based on criterias or groupmemberships and triggers webhooks for transitions in and out of the group.
 
 ### PARAMETERS
 
-#### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 #### -TransitionInUrls
-
-
-```yaml
-Type: String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-#### -TransitionOutUrls
-
+A POST of the user object will be sent to the urls
 
 ```yaml
 Type: String[]
@@ -274,6 +244,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+#### -TransitionOutUrls
+A POST of the user object will be sent to the urls
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 #### -WhatIf
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
@@ -282,6 +267,21 @@ The cmdlet is not run.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+#### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
 
 Required: False
 Position: Named
@@ -310,10 +310,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### INPUTS
 
-#### None
 ### OUTPUTS
 
-#### System.Object
 ### NOTES
 
 ### RELATED LINKS
@@ -425,7 +423,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## Get-AdvancedCriteriaBasedGroupUsers
 
 ### SYNOPSIS
-{{ Fill in the Synopsis }}
+Gets users from specified group object
 
 ### SYNTAX
 
@@ -441,16 +439,16 @@ Get-AdvancedCriteriaBasedGroupUsers -MembersOfGroupObjectId <String> [-ProgressA
 ```
 
 ### DESCRIPTION
-
+Gets users specified in -MembersOfGroupObjectId using Microsoft Graph
 
 ### EXAMPLES
 
-#### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+#### EXAMPLE 1
+```
+Get-AdvancedCriteriaBasedGroupUsers -MembersOfGroupObjectId "20a2a612-fbd5-4fd6-a94a-1edefcdf48a9"
 ```
 
-{{ Add example description here }}
+This example gets all users from the group with the specified object id
 
 ### PARAMETERS
 
@@ -489,17 +487,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### INPUTS
 
-#### None
 ### OUTPUTS
 
-#### System.Object
 ### NOTES
 
 ### RELATED LINKS
 ## Remove-AdvancedCriteriaBasedGroupMember
 
 ### SYNOPSIS
-{{ Fill in the Synopsis }}
+Removes a user from a group based on a criteria or a list of group members.
 
 ### SYNTAX
 
@@ -509,16 +505,19 @@ Remove-AdvancedCriteriaBasedGroupMember [-User] <Object> [-ProgressAction <Actio
 ```
 
 ### DESCRIPTION
-
+Removes a user from a group if the user is a member of the specified group.
+Used in conjunction with Get-AdvancedCriteriaBasedGroupUsers to filter users based on attributes.
 
 ### EXAMPLES
 
-#### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+#### EXAMPLE 1
+```
+Get-AdvancedCriteriaBasedGroupUsers -MembersOfGroupObjectId "20a2a612-fbd5-4fd6-a94a-1edefcdf48a9" | 
+Where-Object usageLocation -in "NO" |
+Remove-AdvancedCriteriaBasedGroupMember -Debug
 ```
 
-{{ Add example description here }}
+This example removes all users from the group that are members of the group with the specified object id.
 
 ### PARAMETERS
 
@@ -531,7 +530,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
@@ -557,17 +556,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### INPUTS
 
-#### System.Object
 ### OUTPUTS
 
-#### System.Object
 ### NOTES
 
 ### RELATED LINKS
 ## Remove-AdvancedCriteriaBasedGroupMembers
 
 ### SYNOPSIS
-{{ Fill in the Synopsis }}
+Removes users from a group based on a criteria or a list of group members.
 
 ### SYNTAX
 
@@ -584,21 +581,28 @@ Remove-AdvancedCriteriaBasedGroupMembers -MembersOfGroupObjectId <String> [-Pass
 ```
 
 ### DESCRIPTION
-
+Removes users from a group if user properties no longer match the criteria or if the user is a member of the specified group.
 
 ### EXAMPLES
 
-#### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+#### EXAMPLE 1
+```
+Remove-AdvancedCriteriaBasedGroupMembers -Criteria { $_.UserPrincipalName -like "admin*"} -Verbose -Debug
 ```
 
-{{ Add example description here }}
+This example removes all users from the group where the UserPrincipalName starts with "admin".
+
+#### EXAMPLE 2
+```
+Remove-AdvancedCriteriaBasedGroupMembers -MembersOfGroupObjectId "20a2a612-fbd5-4fd6-a94a-1edefcdf48a9" -Verbose -Debug
+```
+
+This example removes all users from the group that are members of the group with the specified object id.
 
 ### PARAMETERS
 
 #### -Criteria
-
+Specify a criteria to filter users to remove
 
 ```yaml
 Type: ScriptBlock
@@ -613,7 +617,7 @@ Accept wildcard characters: False
 ```
 
 #### -MembersOfGroupObjectId
-
+Remove user from script group if member of the specified group in this parameter
 
 ```yaml
 Type: String
@@ -628,7 +632,7 @@ Accept wildcard characters: False
 ```
 
 #### -Passthru
-
+Passes the removed users through the pipeline
 
 ```yaml
 Type: SwitchParameter
@@ -637,7 +641,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -662,10 +666,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### INPUTS
 
-#### None
 ### OUTPUTS
 
-#### System.Object
 ### NOTES
 
 ### RELATED LINKS
