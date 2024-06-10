@@ -669,6 +669,127 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### NOTES
 
 ### RELATED LINKS
+## Select-AdvancedCriteriaBasedGroupUsers
+
+### SYNOPSIS
+Filters out users based on a specified criteria or group membership
+
+### SYNTAX
+
+#### GroupMembers
+```
+Select-AdvancedCriteriaBasedGroupUsers -User <Object> -MembersOfGroupObjectId <String>
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
+```
+
+#### Criteria
+```
+Select-AdvancedCriteriaBasedGroupUsers -User <Object> -Criteria <ScriptBlock>
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
+```
+
+### DESCRIPTION
+This function filters out users based on a specified criteria or group membership.
+The criteria can be a script block that returns a boolean value for each user.
+If the script block returns $true, the user will be returned.
+
+### EXAMPLES
+
+#### EXAMPLE 1
+```
+## This example adds that are a member of a group, and also have a UserPrincipalName ending with @contoso.com
+Get-AdvancedCriteriaBasedGroupUsers |
+Select-AdvancedCriteriaBasedGroupUsers -MembersOfGroupObjectId "20a2a612-fbd5-4fd6-a94a-1edefcdf48a9" |
+Select-AdvancedCriteriaBasedGroupUsers -Criteria { $_.UserPrincipalName -like "*@contoso.com" } |
+Add-AdvancedCriteriaBasedGroupMember
+```
+
+Complete-AdvancedCriteriaBasedGroup
+
+#### EXAMPLE 2
+```
+## This example adds users that are member of all three groups
+Get-AdvancedCriteriaBasedGroupUsers |
+Select-AdvancedCriteriaBasedGroupUsers -MembersOfGroupObjectId "2f4a2003-3684-4139-bff6-d737813991b5" |
+Select-AdvancedCriteriaBasedGroupUsers -MembersOfGroupObjectId "7572fb59-300d-4fe8-b3c5-047df69d47ef" |
+Select-AdvancedCriteriaBasedGroupUsers -MembersOfGroupObjectId "d937e7a1-78e4-4719-9293-675a1a22939d" |
+Add-AdvancedCriteriaBasedGroupMember
+```
+
+Complete-AdvancedCriteriaBasedGroup
+
+### PARAMETERS
+
+#### -User
+User input object, usually from pipeline
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+#### -Criteria
+The criteria to use to determine which users to add to the group
+
+```yaml
+Type: ScriptBlock
+Parameter Sets: Criteria
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+#### -MembersOfGroupObjectId
+The object id of the group where users should be fetched from
+
+```yaml
+Type: String
+Parameter Sets: GroupMembers
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+#### -ProgressAction
+
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+#### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+
+### INPUTS
+
+### OUTPUTS
+
+### NOTES
+
+### RELATED LINKS
 ## Start-AdvancedCriteriaBasedGroup
 
 ### SYNOPSIS
