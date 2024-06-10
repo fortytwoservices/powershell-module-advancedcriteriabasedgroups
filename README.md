@@ -324,14 +324,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 #### AutomationAccountUserAssignedIdentity (Default)
 ```
-Connect-AdvancedCriteriaBasedGroups [-DoNotCacheAllUsers] [-UserProperties <String[]>]
+Connect-AdvancedCriteriaBasedGroups [-DoNotCacheAllUsers] [-UserProperties <String[]>] [-Environment <String>]
  [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 #### MgGraphConnection
 ```
 Connect-AdvancedCriteriaBasedGroups [-UseExistingMgGraphConnection] [-DoNotCacheAllUsers]
- [-UserProperties <String[]>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-UserProperties <String[]>] [-Environment <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ### DESCRIPTION
@@ -355,6 +355,22 @@ PS C:\> {{ Add example code here }}
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+#### -Environment
+
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+Accepted values: Global, China, USGov, USGovDoD
 
 Required: False
 Position: Named
@@ -463,6 +479,100 @@ Aliases:
 Required: True
 Position: Named
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+#### -ProgressAction
+
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+#### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+
+### INPUTS
+
+### OUTPUTS
+
+### NOTES
+
+### RELATED LINKS
+## New-MicrosoftGraphServicePrincipalApplicationPermission
+
+### SYNOPSIS
+Assigns a service principal certain application permissions for Microsoft Graph
+
+### SYNTAX
+
+```
+New-MicrosoftGraphServicePrincipalApplicationPermission [[-GraphPermission] <String[]>] [[-ObjectId] <String>]
+ [[-Environment] <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+```
+
+### DESCRIPTION
+
+
+### EXAMPLES
+
+#### EXAMPLE 1
+```
+New-MicrosoftGraphServicePrincipalApplicationPermission -ObjectId "00000000-0000-0000-0000-000000000000" -GraphPermission "User.Read.All", "User.ReadWrite.All
+```
+
+### PARAMETERS
+
+#### -GraphPermission
+
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+#### -ObjectId
+The objectid of the service principal to assign permissions to
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+#### -Environment
+
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: Global
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
